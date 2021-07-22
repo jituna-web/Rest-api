@@ -7,7 +7,7 @@ header('Content-Type: application/json');
 include_once('../core/initialize.php');
 
 
-$post= new Post($db);
+$post= new Category($db);
 
 
 $result = $post ->read();
@@ -22,18 +22,14 @@ if($num > 0){
         extract($row);
         $post_item = array(
             'id' => $id,
-            'title' => $title,
-            'price' => $price,
-            'description' =>$description,
-            'category_id' => $category_id,
-            'category_name' => $category_name
+            'name' => $name
         );
         array_push($post_arr['data'],$post_item);
     }
     
     echo json_encode($post_arr);
 } else {
-    echo json_encode (array('message' => 'Nic nenalezeno.'));
+    echo json_encode (array('message' => 'Nenalezena žádná kategorie.'));
 
 }
 
